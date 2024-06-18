@@ -44,6 +44,7 @@ public class IOTController {
                 Utils.activeStation.add(station);
             }
         }
+        iotService.publicCurrentState();
         String json = "{\"station_id\":\"" +  station +",\"type\":\"station\",\"sensors\":[{\"id\":\"temp_0001\",\"status\":1},{\"id\":\"humi_0001\",\"status\":1},{\"id\":\"temp_0002\",\"status\":1},{\"id\":\"humi_0002\",\"status\":1},{\"id\":\"ph_0002\",\"status\":1},{\"id\":\"EC_0002\",\"status\":1},{\"id\":\"Nito_0002\",\"status\":1},{\"id\":\"Photpho_0002\",\"status\":1},{\"id\":\"Kali_0002\",\"status\":1},{\"id\":\"Relay_0001\",\"status\":1},{\"id\":\"Relay_0002\",\"status\":1},{\"id\":\"Relay_0003\",\"status\":1},{\"id\":\"Relay_0004\",\"status\":1}]}";
         return  iotService.PublicStatus(json);
 
@@ -64,6 +65,7 @@ public class IOTController {
             Utils.activeSensor.add(s);
             Utils.inActiveSensor.remove(s); // Removes the current element from the original list
         }
+        iotService.publicCurrentState();
         String json = "{\"station_id\":\"" +  station +",\"type\":\"station\",\"sensors\":[{\"id\":\"temp_0001\",\"status\":1},{\"id\":\"humi_0001\",\"status\":1},{\"id\":\"temp_0002\",\"status\":1},{\"id\":\"humi_0002\",\"status\":1},{\"id\":\"ph_0002\",\"status\":1},{\"id\":\"EC_0002\",\"status\":1},{\"id\":\"Nito_0002\",\"status\":1},{\"id\":\"Photpho_0002\",\"status\":1},{\"id\":\"Kali_0002\",\"status\":1},{\"id\":\"Relay_0001\",\"status\":1},{\"id\":\"Relay_0002\",\"status\":1},{\"id\":\"Relay_0003\",\"status\":1},{\"id\":\"Relay_0004\",\"status\":1}]}";
         return  iotService.PublicStatus(json);
     }
@@ -76,18 +78,20 @@ public class IOTController {
                 Utils.activeSensor.add(idSensor);
             }
         }
+        iotService.publicCurrentState();
         String json = "{\"station_id\":\"" +  station +",\"type\":\"sensor-turn-on\",\"sensor\":\""+idSensor +"\"";
         return  iotService.PublicStatus(json);
     }
     @GetMapping("/api/turn-off/{station}/{idSensor}")
     public String  turnOFFStation(@PathVariable("station") String station, @PathVariable("idSensor") String idSensor) {
-        if(Utils.activeSensor.contains(station)){
-            Utils.activeSensor.remove(station);
-            if(!Utils.inActiveSensor.contains(station)) {
-                Utils.inActiveSensor.add(station);
+        if(Utils.activeSensor.contains(idSensor)){
+            Utils.activeSensor.remove(idSensor);
+            if(!Utils.inActiveSensor.contains(idSensor)) {
+                Utils.inActiveSensor.add(idSensor);
             }
         }
         String json = "{\"station_id\":\"" +  station +",\"type\":\"sensor-turn-off\",\"sensor\":\""+idSensor +"\"";
+        System.out.println(Utils.inActiveSensor);
         return  iotService.PublicStatus(json);
     }
 }
