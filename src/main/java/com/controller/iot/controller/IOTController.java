@@ -94,4 +94,8 @@ public class IOTController {
         System.out.println(Utils.inActiveSensor);
         return  iotService.PublicStatus(json);
     }
+    @GetMapping("/test")
+    public String test(){
+        return "test";
+    }
 }
