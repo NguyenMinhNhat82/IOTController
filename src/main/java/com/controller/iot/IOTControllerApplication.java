@@ -21,7 +21,7 @@ public class IOTControllerApplication {
     }
 
 
-    @Scheduled(fixedRate = 1000*60*8)
+    @Scheduled(fixedRate = 1000*60*3)
     public synchronized void autoGenerateNumber() throws GeneralSecurityException, IOException {
         iotService.publicCurrentState();
     }
