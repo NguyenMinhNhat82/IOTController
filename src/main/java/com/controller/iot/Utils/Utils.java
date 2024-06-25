@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 
 import static java.util.Map.entry;
@@ -13,7 +14,7 @@ import static java.util.Map.entry;
 public class  Utils {
     static DecimalFormat df = new DecimalFormat("#.##");
     static Random random = new Random();
-    public static LocalDateTime lastTimeUpdate = LocalDateTime.now();
+    public static LocalDateTime lastTimeUpdate = LocalDateTime.now(ZoneId.of("Asia/Saigon"));
     public static List<String> activeStation = new ArrayList<>(Arrays.asList("air_0002"));
     public static List<String> inActiveStation = new ArrayList<>();
     public static List<String> activeSensor = new ArrayList<>(Arrays.asList("EC_0002", "humi_0001", "humi_0002", "Kali_0002", "Nito_0002",

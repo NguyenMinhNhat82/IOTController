@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 
 @Service
@@ -47,7 +48,8 @@ public class IOTService {
 
     public String publicCurrentState() {
         Random random = new Random();
-        LocalDateTime now = LocalDateTime.now();
+        ZoneId zid = ZoneId.of("Asia/Saigon");
+        LocalDateTime now = LocalDateTime.now(zid);
         String topicMain = "/innovation/airmonitoring/NBIOS_Copy";
         List<Long> tg = new ArrayList<>(Arrays.asList(900000L,2100000L,3000000L,3600000L, 9000000L));
         Integer randomMangTG = random.nextInt(4);
