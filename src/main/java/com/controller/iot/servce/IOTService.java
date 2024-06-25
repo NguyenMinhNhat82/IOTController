@@ -50,12 +50,12 @@ public class IOTService {
         LocalDateTime now = LocalDateTime.now();
         String topicMain = "/innovation/airmonitoring/NBIOS_Copy";
         List<Long> tg = new ArrayList<>(Arrays.asList(900000L,2100000L,3000000L,3600000L, 9000000L));
-        Integer randomMangTG = random.nextInt(5);
+        Integer randomMangTG = random.nextInt(4);
         Duration duration = Duration.between(Utils.lastTimeUpdate,now) ;
         long millis = duration.toMillis();
         String res = "";
         Map<String, String> dataToPub= null;
-        if(millis >= tg.get(0)){
+        if(millis >= tg.get(randomMangTG)){
 
             Integer hour = now.getHour();
             if(hour >= 0 && hour <= 3)
