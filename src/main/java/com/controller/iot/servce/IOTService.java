@@ -58,7 +58,6 @@ public class IOTService {
         String res = "";
         Map<String, String> dataToPub= null;
         if(millis >= tg.get(randomMangTG)){
-
             Integer hour = now.getHour();
             if(hour >= 0 && hour <= 3)
                 dataToPub = Utils.dataRandom1;
@@ -73,7 +72,21 @@ public class IOTService {
             else if(hour >=20 && hour <= 23 )
                 dataToPub = Utils.dataRandom6;
             Utils.lastTimeUpdate = now;
+
             Utils.updateLastDataUpdate(dataToPub);
+            Map<String, String> lastestData  = Utils.lastDataUpdate;
+            double randomNumber = random.nextDouble() * 1.5;
+            for(String s : Utils.defaultSensor){
+                if (s.contains("Relay")){
+                    Double dataSensorNow = Double.parseDouble(dataToPub.get(s));
+                    Double dataSensorLast = Double.parseDouble(lastestData.get(s));
+                    if(Math.abs(dataSensorNow -dataSensorLast) > 1.5){
+                        dataToPub.put(s,String.valueOf(Double.parseDouble(lastestData.get(s)) + randomNumber));
+                    }
+                }
+            }
+
+
             if (Utils.activeStation.contains("air_0002")) {
                 res = "{\"station_id\":\"air_0002\",\"station_name\":\"NBIOT 0002\",\"active\":\"1\",\"sensors\":[";
                 int index = 0;
