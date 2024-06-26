@@ -77,7 +77,7 @@ public class IOTService {
             Map<String, String> lastestData  = Utils.lastDataUpdate;
             double randomNumber = random.nextDouble() * 1.5;
             for(String s : Utils.defaultSensor){
-                if (s.contains("Relay")){
+                if (!s.contains("Relay")){
                     Double dataSensorNow = Double.parseDouble(dataToPub.get(s));
                     Double dataSensorLast = Double.parseDouble(lastestData.get(s));
                     if(Math.abs(dataSensorNow -dataSensorLast) > 1.5){
